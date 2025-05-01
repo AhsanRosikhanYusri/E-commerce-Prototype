@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <>
       {/* container */}
-      <div className="w-full lg:h-[20%] h-[10vh]">
+      <div id="Navbar" className="w-full lg:h-[20%] h-[10vh]">
         {/* parent content */}
         <div className="flex justify-between items-center lg:px-16 lg:py-6 sm:p-10 p-6 relative">
           {/* left side */}
@@ -62,11 +62,11 @@ export default function Navbar() {
                   <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                 </li>
                 <li className="relative group cursor-pointer">
-                  Katalog
+                 <a href="#Katalog"> Katalog</a>
                   <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                 </li>
                 <li className="relative group cursor-pointer">
-                  Kontak
+                  <a href="#Kontak">Kontak</a> 
                   <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                 </li>
               </ul>

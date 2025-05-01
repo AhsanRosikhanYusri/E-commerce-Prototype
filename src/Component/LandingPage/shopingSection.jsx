@@ -13,7 +13,7 @@ export default function Shopping (){
 
     return (
         <>
-            <section className="w-full min-h-[100dvh] flex flex-col py-10 items-center justify-center">
+            <section className="w-full min-h-[100dvh] flex flex-col lg:py-10 py-10 md:py-0 items-center justify-center">
                     <h1 className="md:text-5xl text-3xl text-black text-center font-montserrat font-bold">
                         Temukan kami dimana saja
                     </h1>

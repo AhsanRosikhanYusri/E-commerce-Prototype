@@ -43,7 +43,7 @@ const TestiSlider = () => {
   }, []);
 
   const scrollToIndex = (index) => {
-    if (!hasMountedRef.current) return; // hindari scroll saat pertama mount
+    if (!hasMountedRef.current) return; 
 
     const container = containerRef.current;
     if (!container) return;

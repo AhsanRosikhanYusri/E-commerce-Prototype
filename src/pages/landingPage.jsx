@@ -5,6 +5,10 @@ import HeroSection from "../Component/LandingPage/sectionHero"
 import Testimoni from "../Component/LandingPage/Testi"
 import Shopping from "../Component/LandingPage/shopingSection"
 import CSsection from "../Component/LandingPage/CSsection"
+import CommentSection from "../Component/LandingPage/CommentSection"
+import Footer from "../Component/LandingPage/footer"
+import Widget from "../Component/UI-Component/widget"
+
 
 const LandingPage = () => {
     return (
@@ -17,6 +21,10 @@ const LandingPage = () => {
         <Testimoni/>
         <Shopping/>
         <CSsection/>
+        <CommentSection/>
+        <Footer/>
+        <Widget/>
+     
         </>
     )
 }
