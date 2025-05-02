@@ -2,9 +2,13 @@ import Cart from "../../../public/asset/Icon/Cart.svg";
 import Search from "../../../public/asset/Icon/Search.png";
 import User from "../../../public/asset/Icon/User.svg";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [search, setSearch] = useState(false);
   const [burger, setBurger] = useState(false);
+
+    const navigate = useNavigate();
+  
 
   return (
     <>
@@ -102,6 +106,7 @@ export default function Navbar() {
             />
             <img
               className="lg:w-6 sm:w-8 w-6 hover:opacity-40 cursor-pointer transition-all duration-300 ease-in-out"
+              onClick={() => navigate('/Login')}
               src={User}
               alt="User"
             />

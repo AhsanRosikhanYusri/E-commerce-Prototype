@@ -31,7 +31,7 @@ const TestiSlider = () => {
 
   const items = [
     { name: 'Abdul', profile: Profile2, Testimoni: 'Produk ini sangat bagus, saya sangat puas dengan kualitasnya!' },
-    { name: 'DeanINDIA', profile: Profile1, Testimoni: 'Saya mencintai Produk ini saya sudah lama menjadi pelanggan disini sejak saya masih bayi', Jabatan: 'Pelanggan setia2' },
+    { name: 'IR, H, Dean Kiyowo', profile: Profile1, Testimoni: 'Saya suka belanja disini soalnya harganya murah pembelinya sepi makanya murah dan penjual juga yaaa... ramah dan saya ganteng', Jabatan: 'Anggota DPR/RI Komisi 3 Fraksi Golkar' },
     { name: 'Afgan', profile: Profile3, Testimoni: 'Saya cinta javascript.', Jabatan: 'Pelanggan setia' },
     { name: 'Raja Skibidi', profile: Profile4, Testimoni: 'Toko ini sangat bagus saya dilayani layaknya raja', Jabatan: 'Pelanggan Karbit' },
     { name: 'Jefrey', profile: Profile5, Testimoni: 'Saya menyukai Produk-produk disini. membuat saya jauh lebih tampan', Jabatan: 'PELANGGAN TAMPAN' },

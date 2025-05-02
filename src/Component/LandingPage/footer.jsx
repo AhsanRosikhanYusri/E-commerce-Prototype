@@ -21,7 +21,7 @@ export default function Footer() {
                             <h2 className="mb-6 text-sm font-semibold uppercase text-white">Sumber</h2>
                             <ul className="text-[#FFD8A8] font-medium">
                                 <li className="mb-4">
-                                    <a href="https://flowbite.com/" className="hover:text-white">Ahsan RY</a>
+                                    <a href="" className="hover:text-white">Ahsan RY</a>
                                 </li>
                                 <li>
                                     <a href="https://tailwindcss.com/" className="hover:text-white">X RPL 5</a>
