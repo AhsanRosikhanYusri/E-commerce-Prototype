@@ -80,13 +80,13 @@ export default function Navbar() {
           {/* icon content */}
           <div className="flex sm:gap-8 gap-5">
             {/* searchbar */}
-            <div className="flex relative">
+            <div className="flex">
               <input
-                className={`bg-[#e3caa5] sm:h-10 lg:h-8 h-7 rounded-2xl text-md outline-none px-3
+                className={`md:relative absolute md:-translate-x-0 -translate-x-[100%]  bg-[#e3caa5] sm:h-10 lg:h-8 h-7 rounded-2xl text-md outline-none px-3
                 transition-all duration-300 ease-in-out overflow-hidden transform
                 ${
                   search
-                    ? "sm:max-w-[220px] sm:w-[280px] max-w-[100px] opacity-100"
+                    ? "sm:max-w-[220px] sm:w-[280px] max-w-[180px] z-99 opacity-100"
                     : "max-w-0 opacity-0"
                 }`}
                 type="text"
@@ -104,12 +104,12 @@ export default function Navbar() {
               src={Cart}
               alt="Cart"
             />
-            <img
-              className="lg:w-6 sm:w-8 w-6 hover:opacity-40 cursor-pointer transition-all duration-300 ease-in-out"
-              onClick={() => navigate('/Login')}
-              src={User}
-              alt="User"
-            />
+            <div className="bg-brown-300 w-20 rounded-xl flex justify-center items-center px-4 py-1 hover:bg-amber-700
+            transition-colors duration-300 ease-in-out"
+            onClick={() => navigate('/Login')}
+            >
+                <h1 className="text-white font-semibold font-montserrat">Masuk</h1>
+            </div>
           </div>
         </div>
       </div>
