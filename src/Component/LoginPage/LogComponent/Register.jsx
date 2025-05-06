@@ -1,4 +1,4 @@
-export default function Register() {
+export default function Register({setIsRegis}) {
   return (
     <>
     <div className="flex flex-col w-full space-y-6 md:translate-x-15 translate-x-0">
@@ -92,9 +92,13 @@ export default function Register() {
           Kata sandi
         </label>
       </div>
-      <p className="text-right font-montserrat -mt-2 ">Sudah punya akun? <span className="text-brown-300 font-semibold">Masuk</span></p>
+      <p className="text-right font-montserrat -mt-2  ">Sudah punya akun? <span 
+          onClick={()=> setIsRegis(false)}
+         className="text-brown-300 font-semibold cursor-pointer">Masuk</span></p>
 
-        <button className="bg-brown-300 hover:bg-amber-700 -mt-1 h-12 rounded-full text-xl font-montserrat font-bold text-white transition-colors duration-300 ease-in-out">Daftar</button>
+        <button 
+         onClick={()=> setIsRegis(false)}
+        className="bg-brown-300 hover:bg-amber-700 -mt-1 h-12 rounded-full text-xl font-montserrat font-bold text-white transition-colors duration-300 ease-in-out">Daftar</button>
 
       </div>
       </div>

@@ -42,19 +42,31 @@ export default function BannerSection() {
         </div>
         <div className="flex lg:flex-row flex-col lg:gap-10 lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:space-y-0 
                         md:space-y-7 space-y-5 justify-center items-center lg:mt-0 mt-10 ">
-            <div className=" lg:translate-x-0 translate-x-0 md:translate-x-[10dvh]">
+            <div className=" lg:translate-x-0 translate-x-0 md:translate-x-[10dvh]"
+            onClick={() => {
+              document.getElementById('men')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            >
             <Category 
                 image={menClothes} category="Men Clothes"
             />
             </div>
 
-            <div>
+            <div
+              onClick={() => {
+                document.getElementById('women')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              >
             <Category 
                 image={womenClothes} category="Women Clothes"
             />
             </div>
 
-            <div className="lg:-translate-x-0 -translate-x-0 md:-translate-x-[10dvh]">
+            <div className="lg:-translate-x-0 -translate-x-0 md:-translate-x-[10dvh]"
+              onClick={() => {
+                document.getElementById('jewerly')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
             <Category 
                 image={jewelery} category="Jewelery"  
             />

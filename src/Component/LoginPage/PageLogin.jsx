@@ -10,11 +10,11 @@ export default function LoginPage() {
 
   return (
     <>
-      <section className="min-h-screen h-auto lg:px-16 md:px-10 px-6 w-full py-10 flex flex-col ">
+      <section className="min-h-[100dvh] h-auto lg:px-16 md:px-10 px-6 w-full py-10 flex flex-col ">
         <div className=" flex gap-4 w-full ">
         <div
           className="bg-brown-300 py-2 px-4 md:w-[120px] w-[100px] h-fit  rounded-3xl hover:bg-amber-700 transition-colors duration-300 ease-in-out cursor-pointer"
-          onClick={() => ToLandingPage("/Welcome")}
+          onClick={() => ToLandingPage("/")}
         >
           <h2 className="text-white font-montserrat font-bold text-center">
             Kembali
@@ -60,28 +60,28 @@ export default function LoginPage() {
         </div>
 
         {/* Content */}
-          <div className="lg:grid lg:grid-cols-2 mt-12 flex flex-col flex-grow  ">
+          <div className="lg:grid lg:grid-cols-2 lg:mt-12 mt-20 flex flex-col flex-grow overflow-x-hidden  ">
               <div className={`flex flex-col lg:col-span-1 translate-x-0 w-full px-8  relative md:flex-grow md:h-full justify-center items-center
                                 transition-all duration-700 ease-in-out
-                  ${isRegis? 'translate-x-full opacity-0 pointer-events-none' : 'opacity-100 translate-x-0 pointer-events-auto'}
+                  ${isRegis? 'translate-x-full opacity-0 pointer-events-none ' : 'opacity-100 translate-x-0 pointer-events-auto'}
                 `} >
-                    <Login/>
+                    <Login setIsRegis ={setIsRegis}/>
 
                     <div className={`lg:absolute lg:translate-x-[140%] lg:translate-y-0 translate-y-full transition-all duration-700 ease-in-out
-                        ${isRegis? 'opacity-0 lg:translate-x-0' : 'opacity-100 lg:translate-x-[140%]'}
+                        ${isRegis? 'opacity-0 lg:translate-x-0 ' : 'opacity-100 lg:translate-x-[140%]'}
                       `}>
                       <LogWith/>
                     </div>
                     
               </div>
-              <div className={`flex flex-col-reverse lg:col-span-1 -translate-x-0 relative w-full px-8 md:flex-grow md:h-full justify-center items-center
+              <div className={`flex flex-col-reverse lg:col-span-1   -translate-x-0  relative w-full px-8 md:flex-grow md:h-full justify-center items-center
                               transition-all duration-700 ease-in-out
                   ${isRegis? 'opacity-100 -translate-x-0 pointer-events-auto' : 'opacity-0 -translate-x-full pointer-events-none'}
                 `}>
-                <Register/>
+                <Register setIsRegis ={setIsRegis}/>
 
-                <div className={`lg:absolute lg:-translate-x-[140%] md:-translate-x-[18%] lg:translate-y-0 -translate-y-full transition-all duration-700 ease-in-out
-                      ${isRegis? 'opacity-100 lg:-translate-x-[140%] md:-translate-x-[18%]' : 'opacity-0 lg:-translate-x-0'}
+                <div className={`lg:absolute lg:-translate-x-[140%]   lg:translate-y-0 -translate-y-full transition-all duration-700 ease-in-out
+                      ${isRegis? 'opacity-100 lg:-translate-x-[140%] ' : 'opacity-0 lg:-translate-x-0'}
                       `}>
                       <LogWith/>
                     </div>
