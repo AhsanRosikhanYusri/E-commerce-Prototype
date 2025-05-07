@@ -1,6 +1,5 @@
 import Cart from "../../../public/asset/Icon/Cart.svg";
 import Search from "../../../public/asset/Icon/Search.png";
-import User from "../../../public/asset/Icon/User.svg";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 export default function Navbar() {

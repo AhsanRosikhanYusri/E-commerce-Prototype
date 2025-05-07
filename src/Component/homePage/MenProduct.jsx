@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CardProduct from "../UI-Component/cardProduct";
+import { Link } from "react-router-dom";
 
 export default function MenProducts() {
   const [menProducts, setMenProducts] = useState([]);
@@ -30,6 +31,11 @@ export default function MenProducts() {
           <p>Loading products...</p> 
         ) : (
           menProducts.map((product) => (
+            <Link
+              to={`/Product/${product.id}`}
+              key={product.id}
+              className="hover:scale-[1.02] transition-transform duration-200"
+            > 
             <CardProduct
               key={product.id}
               Product={product.image}
@@ -39,6 +45,7 @@ export default function MenProducts() {
               Rating={product.rating.rate}
               ShowRating={true}
             />
+            </Link>
           ))
         )}
       </div>

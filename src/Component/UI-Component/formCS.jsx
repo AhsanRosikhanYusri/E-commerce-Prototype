@@ -2,7 +2,7 @@ const FormCS = ({
     Question = "Apakah ada garansi pada setiap Produk jika ada kerusakan?"
 }) => {
     return (
-        <button className="group border-b-4 border-brown-300 w-[95%] py-2 md:text-lg text-md text-left flex items-center justify-between transition-all duration-300 ease-in-out hover:bg-brown-100">
+        <button className="group border-b-4 border-brown-300 w-[95%] py-2 md:text-lg text-md text-left flex items-center justify-between transition-all duration-300 ease-in-out ">
             <span className="transition-transform duration-300 ease-in-out group-hover:scale-[1.03]">
                 {Question}
             </span>

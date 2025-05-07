@@ -1,4 +1,5 @@
     import { useEffect, useState } from "react";
+    import { Link } from "react-router-dom";
     import CardProduct from "../UI-Component/cardProduct";
 
     export default function NewRelease() {
@@ -26,6 +27,11 @@
 
         <div className="flex flex-wrap md:gap-10 gap-6 w-full justify-center items-center mt-10">
             {products.map((product) => (
+                <Link
+                to={`/Product/${product.id}`}
+                key={product.id}
+                className="hover:scale-[1.02] transition-transform duration-200"
+              > 
             <CardProduct
                 key={product.id}
                 Product={product.image}
@@ -35,6 +41,7 @@
                 Rating={product.rating.rate}
                 ShowRating={true} // Tidak ditampilkan di section ini
             />
+            </Link>
             ))}
         </div>
         </section>

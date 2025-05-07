@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";4
+import { Link } from "react-router-dom";
 import CardProduct from "../UI-Component/cardProduct";
 
 export default function WomenProducts (){
@@ -29,8 +30,13 @@ export default function WomenProducts (){
           <p>Loading products...</p> 
         ) : (
           WomenProducts.map((product) => (
-            <CardProduct
+            <Link
+              to={`/Product/${product.id}`}
               key={product.id}
+              className="hover:scale-[1.02] transition-transform duration-200"
+            > 
+            <CardProduct
+             
               Product={product.image}
               Category={product.category}
               Title={product.title}
@@ -38,6 +44,7 @@ export default function WomenProducts (){
               Rating={product.rating.rate}
               ShowRating={true}
             />
+            </Link>
           ))
         )}
       </div>

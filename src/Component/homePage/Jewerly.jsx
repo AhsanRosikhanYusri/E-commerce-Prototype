@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CardProduct from "../UI-Component/cardProduct";
 import Banner from "../../../public/asset/Image/Banner Jewerly.jpg";
 
@@ -35,6 +36,11 @@ export default function Jewerly() {
               <p>Loading products...</p>
             ) : (
               Jewerly.map((product) => (
+                <Link
+              to={`/Product/${product.id}`}
+              key={product.id}
+              className="hover:scale-[1.02] transition-transform duration-200"
+            > 
                 <CardProduct
                   key={product.id}
                   Product={product.image}
@@ -44,6 +50,7 @@ export default function Jewerly() {
                   Rating={product.rating.rate}
                   ShowRating={true}
                 />
+                </Link>
               ))
             )}
           </div>
