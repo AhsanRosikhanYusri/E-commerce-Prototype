@@ -2,10 +2,14 @@ import Cart from "../../../public/asset/Icon/Cart.svg"
 import Search from "../../../public/asset/Icon/Search.png"
 import Heart from "../../../public/asset/Icon/Hearth.png"
 import Profile from "../../../public/asset/Icon/User.svg"
+import { Navigate, useNavigate } from "react-router-dom"
 
 import { useState } from "react"
 
+
 const NavbarHome  = () => {
+
+    const navigate = useNavigate()
 
     const [search, setSearch] = useState(false)
 
@@ -51,6 +55,9 @@ const NavbarHome  = () => {
              alt="Like" />
 
             <img
+                onClick={() => {
+                    navigate("/cart");
+                }}
               className="lg:w-6 sm:w-8 w-6 hover:opacity-40 cursor-pointer transition-all duration-300 ease-in-out"
               src={Cart}
               alt="Cart"

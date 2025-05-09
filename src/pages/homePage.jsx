@@ -18,7 +18,6 @@ const Homepage = () => {
         <MenProducts/>
         <WomenProducts/>
         <Jewerly/>
-    
         <Footer/>
         </>
     )

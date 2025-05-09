@@ -9,10 +9,10 @@ const CardProduct = ({
   ShowRating = true,
 }) => {
   return (
-    <div className="md:w-[230px] w-[150px] h-[300px] bg-white rounded-lg  hover:opacity-60 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between p-4">
+    <div className="md:w-[230px] w-[150px] h-[300px]  rounded-lg  hover:opacity-60 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between p-4">
       
       {/* Gambar */}
-      <div className="w-full h-[150px] flex items-center justify-center">
+      <div className="w-full h-[150px]  flex items-center justify-center">
         <img
           className="max-h-full max-w-full object-contain"
           src={Product}

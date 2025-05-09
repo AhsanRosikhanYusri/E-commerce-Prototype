@@ -95,7 +95,7 @@ const TestiSlider = () => {
       {/* Container Slider */}
       <div
         ref={containerRef}
-        className="flex overflow-x-auto snap-x snap-mandatory gap-5 w-full px-4 scrollbar-hide"
+        className="flex overflow-x-auto snap-mandatory  gap-5 w-full px-4 scrollbar-hide"
       >
         {items.map((item, index) => {
           const distance = Math.abs(index - activeIndex);
