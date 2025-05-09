@@ -29,6 +29,7 @@ const Detail = () => {
     jewelery: ["4 cm", "5 cm", "6 cm", "7 cm"],
   };
 
+
   const handleBuyNow = () => {
     if (!selectedSize) {
       setWarning("Silakan pilih ukuran terlebih dahulu.");
@@ -36,10 +37,31 @@ const Detail = () => {
     }
     else{
 
-      
+      const checkoutProduct = {
+        title: product.title,
+        category: product.category,
+        price: product.price,
+        size: selectedSize,
+        quantity: 1,
+        image: product.image,
+      }
 
+      const totalPrice = checkoutProduct.price * checkoutProduct.quantity;
+      const tax = totalPrice * 0.1;
+      const totalWithTax = totalPrice + tax;
+
+      const checkoutData = {
+        items: [checkoutProduct],
+        totalPrice,
+        tax,
+        totalWithTax,
+      };
+
+      localStorage.setItem("checkoutData", JSON.stringify(checkoutData));
 
       setWarning("");
+
+      navigate("/Pay");
     }
 
     
