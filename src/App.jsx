@@ -6,6 +6,7 @@
   import ProductDetail from './pages/ProductDetail';
   import Cart from './pages/cart';
   import Payment from './pages/payment';
+  import Liked from './pages/liked';
 
 
   function App() {
@@ -21,6 +22,7 @@
             <Route path='/Product/:id' element = {<ProductDetail/>}/>
             <Route path= '/cart' element={<Cart/>}/>
             <Route path= '/Pay' element={<Payment/>}/>
+            <Route path = '/Liked' element={<Liked/>}/>
         </Routes>
       </Router>
       

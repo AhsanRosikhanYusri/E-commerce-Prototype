@@ -1,6 +1,6 @@
 import Banner from "../../../public/asset/Image/Banner.webp";
 import Banner2 from "../../../public/asset/Image/Banner2.jpg";
-import Banner3 from "../../../public/asset/Image/Banner3.jpg";
+import Banner3 from "../../../public/asset/Image/Banner3.jpg"
 
 import { useState, useEffect } from "react";
 

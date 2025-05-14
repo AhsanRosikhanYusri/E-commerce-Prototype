@@ -1,4 +1,5 @@
 import Star from "../../../public/asset/Icon/Star.png";
+import Like from "../../../public/asset/Icon/Hearth.png"
 
 const CardProduct = ({
   Product,
@@ -7,6 +8,8 @@ const CardProduct = ({
   Price,
   Rating,
   ShowRating = true,
+  ShowLike = false,
+  onClick = () => {}
 }) => {
   return (
     <div className="md:w-[230px] w-[150px] h-[300px]  rounded-lg  hover:opacity-60 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between p-4">
@@ -34,6 +37,16 @@ const CardProduct = ({
         <div className="w-full flex justify-between items-center mt-auto pt-3">
           <h1 className="text-[1.1rem] font-bold text-gray-800">{Price}</h1>
 
+         
+          <div className="flex gap-2">
+          {ShowLike && (
+            <div 
+            onClick={onClick}
+            className="flex self-center"> 
+                <img className="w-5 h-5" src={Like} alt="" />
+            </div>
+          )}
+
           {/* Rating hanya jika ShowRating true */}
           {ShowRating && (
             <div className="flex gap-1 items-center">
@@ -42,6 +55,8 @@ const CardProduct = ({
             </div>
           )}
         </div>
+          </div>
+          
       </div>
     </div>
   );

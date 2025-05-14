@@ -50,6 +50,9 @@ const NavbarHome  = () => {
              </div>
 
              <img 
+             onClick={() => {
+                navigate("/Liked")
+             }}
              className="w-6 h-6 hover:opacity-40 cursor-pointer transition-all duration-300 ease-in-out"
              src={Heart} 
              alt="Like" />

@@ -44,6 +44,10 @@ const Detail = () => {
         size: selectedSize,
         quantity: 1,
         image: product.image,
+        rating: {
+          rate: product.rating.rate
+        }
+      
       }
 
       const totalPrice = checkoutProduct.price * checkoutProduct.quantity;
@@ -123,8 +127,35 @@ const Detail = () => {
   const handleLikeClick = () => {
     const newLikedStatus = !isLiked;
     setIsLiked(newLikedStatus);
-    localStorage.setItem(`liked-${product.id}`, newLikedStatus);
+  
+    // Ambil data like yang sudah ada di localStorage
+    const existingLikes = JSON.parse(localStorage.getItem("likedProducts")) || [];
+  
+    const likedProduct = {
+      id: product.id,
+      title: product.title,
+      price: product.price,
+      image: product.image,
+      category: product.category,
+      rating: {
+        rate: product.rating.rate,
+      },
+    };
+  
+    if (newLikedStatus) {
+      // Tambahkan jika belum ada
+      const alreadyExists = existingLikes.some(item => item.id === product.id);
+      if (!alreadyExists) {
+        const updatedLikes = [...existingLikes, likedProduct];
+        localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));
+      }
+    } else {
+      // Hapus dari localStorage jika unlike
+      const updatedLikes = existingLikes.filter(item => item.id !== product.id);
+      localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));
+    }
   };
+  
 
   // handle klik buat cart
 
