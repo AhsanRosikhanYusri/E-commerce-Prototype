@@ -11,6 +11,8 @@ const CardProduct = ({
   ShowLike = false,
   onClick = () => {}
 }) => {
+
+
   return (
     <div className="md:w-[230px] w-[150px] h-[300px]  rounded-lg  hover:opacity-60 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between p-4">
       

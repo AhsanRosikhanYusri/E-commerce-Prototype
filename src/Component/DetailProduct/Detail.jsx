@@ -4,11 +4,12 @@ import Back from "../../../public/asset/Icon/Back.png";
 import { useNavigate } from "react-router-dom";
 import CardProduct from "../UI-Component/cardProduct";
 import { Link } from "react-router-dom";
+import Footer from "../LandingPage/footer"
 
 import SizeSelect from "../UI-Component/size";
 import Star from "../../../public/asset/Icon/Star.png";
 import cart from "../../../public/asset/Icon/Cart.svg";
-import Toast from "../UI-Component/toast";
+import toast, { Toaster } from "react-hot-toast";
 
 const Detail = () => {
   const { id } = useParams();
@@ -19,8 +20,9 @@ const Detail = () => {
   const [recomend, setRecomend] = useState([]);
   const [warning, setWarning] = useState("");
   const [showSizeWarning, setShowSizeWarning] = useState(false);
-  const [showToast, setShowToast] = useState(false);
-
+  const [description, setDescription] = useState(false)
+  const [quantity, setQuantity] = useState(1)
+ 
   // pilihan ukuran berdasarkan kategori gweh
 
   const sizeOptionsByCategory = {
@@ -29,26 +31,35 @@ const Detail = () => {
     jewelery: ["4 cm", "5 cm", "6 cm", "7 cm"],
   };
 
+  const handleQuantity = (type) => {
+    setQuantity((prevQuantity) => {
+         let newQuantity = type === "increment" ? prevQuantity + 1 : prevQuantity - 1;
+    if (newQuantity < 1) newQuantity = 1;
 
+    if (product) {
+      localStorage.setItem(`quantity-${product.id}`, newQuantity.toString());
+    }
+
+    return newQuantity;
+    })
+  } 
+  
   const handleBuyNow = () => {
     if (!selectedSize) {
       setWarning("Silakan pilih ukuran terlebih dahulu.");
       return;
-    }
-    else{
-
+    } else {
       const checkoutProduct = {
         title: product.title,
         category: product.category,
         price: product.price,
         size: selectedSize,
-        quantity: 1,
+        quantity: quantity,
         image: product.image,
         rating: {
-          rate: product.rating.rate
-        }
-      
-      }
+          rate: product.rating.rate,
+        },
+      };
 
       const totalPrice = checkoutProduct.price * checkoutProduct.quantity;
       const tax = totalPrice * 0.1;
@@ -67,8 +78,6 @@ const Detail = () => {
 
       navigate("/Pay");
     }
-
-    
   };
 
   // ngefetch API untuk halaman detail dari id nya
@@ -78,6 +87,17 @@ const Detail = () => {
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [id]);
+
+  //render untuk quantity
+  useEffect(() => {
+  if (product) {
+    const savedQuantity = localStorage.getItem(`quantity-${product.id}`);
+    if (savedQuantity) {
+      setQuantity(parseInt(savedQuantity, 10));
+    }
+  }
+}, [product]);
+
 
   // localStorage pilihan size brok
   useEffect(() => {
@@ -110,7 +130,9 @@ const Detail = () => {
           (item) => item.category.toLowerCase() !== "electronics"
         );
 
-        setRecomend(filteredProducts);
+        const fourProduct = filteredProducts.slice(0,4);
+
+        setRecomend(fourProduct);
       })
       .catch((error) => console.error("Error fetching products:", error));
   }, []);
@@ -127,10 +149,18 @@ const Detail = () => {
   const handleLikeClick = () => {
     const newLikedStatus = !isLiked;
     setIsLiked(newLikedStatus);
-  
+
+    if (newLikedStatus) {
+      localStorage.setItem(`liked-${product.id}`, "true");
+       toast.success('Product Liked')
+    } else {
+      localStorage.removeItem(`liked-${product.id}`);
+    }
+
     // Ambil data like yang sudah ada di localStorage
-    const existingLikes = JSON.parse(localStorage.getItem("likedProducts")) || [];
-  
+    const existingLikes =
+      JSON.parse(localStorage.getItem("likedProducts")) || [];
+
     const likedProduct = {
       id: product.id,
       title: product.title,
@@ -141,21 +171,26 @@ const Detail = () => {
         rate: product.rating.rate,
       },
     };
-  
+
     if (newLikedStatus) {
       // Tambahkan jika belum ada
-      const alreadyExists = existingLikes.some(item => item.id === product.id);
+      const alreadyExists = existingLikes.some(
+        (item) => item.id === product.id
+      );
       if (!alreadyExists) {
         const updatedLikes = [...existingLikes, likedProduct];
         localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));
       }
     } else {
       // Hapus dari localStorage jika unlike
-      const updatedLikes = existingLikes.filter(item => item.id !== product.id);
+      const updatedLikes = existingLikes.filter(
+        (item) => item.id !== product.id
+      );
       localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));
     }
+
+   
   };
-  
 
   // handle klik buat cart
 
@@ -183,26 +218,25 @@ const Detail = () => {
         price: product.price,
         image: product.image,
         category: product.category,
-        quantity: 1,
+        quantity: quantity,
         size: selectedSize,
         rating: {
-          rate: product.rating.rate, 
-        }
+          rate: product.rating.rate,
+        },
       });
     }
 
     localStorage.setItem("cart", JSON.stringify(existingCart));
     setShowSizeWarning(false);
-
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 2000);
+    toast.success("Successfully Added");
   };
 
   // update size bisa di isi bisa kosong
   const sizes = sizeOptionsByCategory[product.category] || [];
 
   return (
-    <section className="w-full min-h-screen flex flex-col lg:px-16 lg:py-6 sm:p-10 p-6">
+    <section className="w-full min-h-screen ">
+      <div className="flex flex-col lg:px-16 lg:py-6 sm:p-10 p-6">
       {/* Header dengan icon dan judul */}
       <div className="flex items-center md:gap-6 gap-4">
         <img
@@ -218,16 +252,10 @@ const Detail = () => {
 
       {/* Kontainer Detail */}
       <div className="flex flex-1 w-full items-start justify-center px-4 md:px-20 py-20 relative">
-        {showToast && (
-          <div className={`absolute -top-10 left-1/2 -translate-x-1/2 z-50 transition-opacity duration-500 ${showToast ? "opacity-100" : "opacity-0"}`}>
-            <Toast
-            message={"succses add to cart"}
-            />
-          </div>
-        )}
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="flex lg:flex-row flex-col md:gap-10 gap-6 w-full max-w-6xl h-full justify-between items-start">
           {/* Gambar Produk */}
-          <div className="flex-shrink-0 w-[300px] h-[400px]rounded-lg flex lg:items-start items-center lg:justify-start justify-center lg:self-start self-center">
+          <div className="flex-shrink-0 w-[250px] h-[350px]rounded-lg flex lg:items-start items-center lg:justify-start justify-center lg:self-start self-center">
             <img
               className="w-full h-full object-contain p-4"
               src={product.image}
@@ -238,7 +266,7 @@ const Detail = () => {
           {/* Konten Kanan */}
           <div className="flex flex-col gap-4 justify-start items-start flex-1">
             <div className="w-full flex lg:flex-row flex-col justify-between">
-              <h1 className="font-bold md:text-3xl text-2xl text-wrap flex lg:items-start lg:w-[85%] text-brown-300">
+              <h1 className="font-bold text-[28px] text-wrap flex lg:items-start lg:w-[85%] text-brown-300">
                 {product.title}
               </h1>
               <div className="flex gap-2 h-10 lg:justify-center items-center lg:mt-0 mt-2">
@@ -246,14 +274,17 @@ const Detail = () => {
                 <h1 className="font-semibold flex self-center font-montserrat text-xl">
                   {product.rating.rate}
                 </h1>
+                 <h1 className="font-montserrat text-xs">(99+)</h1>
               </div>
             </div>
-
-            <h2 className="font-montserrat">{product.category}</h2>
+            <div className="flex md:flex-row flex-col md:gap-4 justify-center  text-left  -mt-2 ">
+            <h2 className=" font-montserrat text-[14px]">{product.category}</h2>
+            <h2 className="text-md opacity-70 text-slate-500 font-medium font-montserrat text-[14px] self-center">99+ Product Sold</h2>
+            </div>
 
             {/* Pilihan Ukuran */}
             {sizes.length > 0 && (
-              <div className="flex gap-2 flex-wrap mt-4">
+              <div className="flex gap-2 flex-wrap">
                 {sizes.map((size) => (
                   <SizeSelect
                     key={size}
@@ -279,14 +310,33 @@ const Detail = () => {
 
             {/* Deskripsi */}
             <div className="mt-4 space-y-3">
-              <h1 className="font-montserrat font-medium text-xl">
-                Deskripsi Produk
+              <h1 className=" border-b-2 pb-2 border-black/20 font-montserrat font-medium text-xl">
+                Product Description  
               </h1>
-              <p className="font-montserrat">{product.description}</p>
+              <p className={` ${description ? "line-clamp-none" : "line-clamp-2"} text-[14px] font-montserrat`}>{product.description}</p>
+              <p 
+              onClick={() => setDescription(!description)}
+              className=" cursor-pointer max-w-[100px] font-montserrat font-semibold hover:text-brown-300 hover:underline transition-all duration-300 ease-in-out text-[14px] ">Read More</p>
+
             </div>
             <div className="w-full space-y-4">
               <div className="flex items-center gap-4">
                 <h1 className="text-xl font-semibold">${product.price}</h1>
+
+                <div className="flex justify-center items-center gap-2">
+                <button
+                onClick={() => handleQuantity("decrement")}
+                className="px-2 py-1 w-6 h-6 flex justify-center items-center text-xl font-bold transition-all duration-300 ease-in-out bg-amber-600 rounded hover:bg-amber-900 text-white">
+                  -
+                </button>
+                  <p className="bg-brown-300 text-white font-montserrat font-medium p-1 rounded-lg min-w-[30px] text-center">{quantity}</p>
+                  <button 
+                  onClick={() => handleQuantity("increment")}
+                  className="px-2 py-1 w-6 h-6 flex justify-center items-center text-xl font-bold transition-all duration-300 ease-in-out bg-amber-600 rounded hover:bg-amber-900 text-white">
+                  +
+                </button>
+                </div>
+
                 {warning && (
                   <p className="text-red-600 font-semibold font-montserrat md:text-sm text-xs ">
                     {warning}
@@ -311,8 +361,7 @@ const Detail = () => {
                   <img
                     onClick={() => {
                       handleAddToCart();
-                      
-                    }}                    
+                    }}
                     className="w-8 h-auto "
                     src={cart}
                     alt="cart"
@@ -343,7 +392,7 @@ const Detail = () => {
 
       <div>
         <h1 className="text-3xl text-center font-montserrat text-brown-300 font-bold">
-          Rekomendasi
+          Recomendation
         </h1>
       </div>
 
@@ -370,6 +419,8 @@ const Detail = () => {
           ))
         )}
       </div>
+      </div>
+      <Footer/>
     </section>
   );
 };

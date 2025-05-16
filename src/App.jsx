@@ -7,27 +7,43 @@
   import Cart from './pages/cart';
   import Payment from './pages/payment';
   import Liked from './pages/liked';
+  import SearchPage from './pages/search';
 
 
-  function App() {
-    
-    return (
-      <> 
-      <Router>
-        <ScrollToTop/>
-        <Routes>
-            <Route path='/' element ={<LandingPage/>} />
-            <Route path='/Login' element = {<LoginPage/>} />
-            <Route path='/Home' element = {<Homepage/>}/>
-            <Route path='/Product/:id' element = {<ProductDetail/>}/>
-            <Route path= '/cart' element={<Cart/>}/>
-            <Route path= '/Pay' element={<Payment/>}/>
-            <Route path = '/Liked' element={<Liked/>}/>
-        </Routes>
-      </Router>
-      
-      </>
-    )
-  }
+  import { useEffect, useState } from "react";
+
+function App() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+ 
+    fetch("https://fakestoreapi.com/products")
+      .then(res => res.json())
+      .then(data =>  {
+          const filteredProducts = data.filter(
+          (item) => item.category.toLowerCase() !== "electronics"
+        );
+
+        setProducts(filteredProducts)
+      })
+      .catch(err => console.error(err));
+  }, []);
+
+  return (
+    <Router>
+      <ScrollToTop/>
+      <Routes>
+        <Route path='/' element={<LandingPage />} />
+        <Route path='/Login' element={<LoginPage />} />
+        <Route path='/Home' element={<Homepage />} />
+        <Route path='/Product/:id' element={<ProductDetail />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/Pay' element={<Payment />} />
+        <Route path='/Liked' element={<Liked />} />
+        <Route path='/search' element={<SearchPage products={products} />} />
+      </Routes>
+    </Router>
+  );
+}
 
   export default App
