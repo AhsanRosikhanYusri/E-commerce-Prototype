@@ -80,7 +80,11 @@ const NavbarHome = () => {
             alt="Cart"
           />
 
-          <img className="" src={Profile} alt="" />
+          <img 
+          onClick={() => {
+            navigate("/Profile")
+          }}
+          className="" src={Profile} alt="" />
         </div>
       </div>
     </>

@@ -15,6 +15,8 @@ const Liked = () => {
     setLiked(savedLikes);
   }, []);
 
+
+
   // Fungsi untuk menghapus produk dari daftar disukai
   const handleUnlikeClick = (productId) => {
     const updatedLikes = liked.filter((product) => product.id !== productId);
@@ -22,6 +24,8 @@ const Liked = () => {
      localStorage.removeItem(`liked-${productId}`);
     localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));  // Pastikan nama key konsisten
   };
+
+    localStorage.setItem("liked", JSON.stringify(liked))
 
   return (
     <section className="w-full min-h-[100dvh] h-auto  ">
@@ -38,8 +42,8 @@ const Liked = () => {
         </h1>
       </div>
       <div className="mt-10 md:px-12 w-full h-auto flex  flex-col">
-        <h1 className="font-semibold lg:text-start text-center font-inter text-black text-2xl">
-          Product you Liked
+        <h1 className="font-semibold lg:text-start text-center font-inter text-black text-xl">
+          Product you Liked <span className="text-md">({liked.length})</span>
         </h1>
 
         <div>

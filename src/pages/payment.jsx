@@ -132,7 +132,7 @@ const Payment = () => {
         hasError = true;
       }
     }
-
+ 
     if (!selectedMethod) {
       setWarning("Please select a payment method");
       return;
@@ -163,7 +163,12 @@ const Payment = () => {
   draggable: true
 });
 
-    localStorage.setItem("paymentData", JSON.stringify(paymentData));
+  const existingHistory = JSON.parse(localStorage.getItem("paymentData")) || [];
+
+const updatedHistory = [...existingHistory, paymentData];
+
+
+localStorage.setItem("paymentData", JSON.stringify(updatedHistory));
     localStorage.removeItem("cart"); // kosongkan cart
     setFormErrors({}); // reset error
        await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -225,7 +230,7 @@ const Payment = () => {
                       </div>
 
                       <div className="flex-1">
-                        <div className="flex justify-between items-start">
+                        <div className="flex justify-between items-start max-w-[300px]">
                           <h3 className="font-semibold text-lg text-brown-400 truncate max-w-[70%]">
                             {item.title}
                           </h3>

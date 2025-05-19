@@ -19,12 +19,18 @@ export default function CSsection() {
       <div className="flex-grow flex flex-col-reverse lg:gap-0 gap-10 lg:grid lg:grid-cols-5 w-full lg:mt-15 mt-10">
         <div className="w-full lg:col-span-3 space-y-2">
           <FormCS />
-          <FormCS />
-          <FormCS />
-          <FormCS />
-          <FormCS />
-          <FormCS />
-          <FormCS />
+          <FormCS 
+          Question="Bagaimana jika ada keterlambatan pengiriman?"/>
+          <FormCS 
+          Question="Apa bahan dasar dari produk?"/>
+          <FormCS 
+          Question="Dari mana asal brand ini?"/>
+          <FormCS 
+          Question="Saya kesulitan dalam penggunaan web?"/>
+          <FormCS 
+          Question="apakah ada ukuran yang lebih besar?"/>
+          <FormCS 
+          Question="saya kesulitan dalam memilih"/>
         </div>
 
         <div className="w-full h-full lg:w-full md:w-[70%] flex flex-col space-y-4 self-center bg-[#673418] p-4 lg:col-span-2 rounded-4xl px-12 py-10">
@@ -43,8 +49,6 @@ export default function CSsection() {
           Hubungi Kami
           <FaWhatsapp className="opacity-0 fill-green-400 transition-opacity duration-300 group-hover:opacity-100" />
         </span>
-
-       
         <div className="absolute inset-0 bg-brown-300 translate-x-full rounded-full group-hover:translate-x-0 transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100"></div>
       </button>
     </section>

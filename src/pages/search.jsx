@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Back from "../../public/asset/Icon/Back.png"
 import { Link } from "react-router-dom";
 import Footer from "../Component/LandingPage/footer";
+import NavbarHome from "../Component/homePage/NavbarHome"
 
 const SearchPage = ({ products }) => {
   const [searchParams] = useSearchParams();
@@ -20,6 +21,7 @@ const SearchPage = ({ products }) => {
 
   return (
     <section className="min-h-[100dvh] w-full ">
+      <NavbarHome/>
       <div className="lg:px-16 lg:py-6 sm:p-10 p-6">
           <div className="flex items-center md:gap-6 gap-4">
             <img

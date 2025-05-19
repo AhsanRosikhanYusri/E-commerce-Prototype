@@ -8,6 +8,9 @@
   import Payment from './pages/payment';
   import Liked from './pages/liked';
   import SearchPage from './pages/search';
+  import Profile from './pages/profile';
+  import CustomerService from './pages/CustomerService';
+  import CouponPage from './pages/coupon';
 
 
   import { useEffect, useState } from "react";
@@ -41,6 +44,10 @@ function App() {
         <Route path='/Pay' element={<Payment />} />
         <Route path='/Liked' element={<Liked />} />
         <Route path='/search' element={<SearchPage products={products} />} />
+        <Route path='/Profile' element ={<Profile/>}/>
+        <Route path='/cs' element ={<CustomerService/>}/>
+        <Route path='/coupon' element ={<CouponPage/>}/>
+        
       </Routes>
     </Router>
   );
