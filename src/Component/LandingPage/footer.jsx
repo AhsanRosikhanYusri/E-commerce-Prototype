@@ -18,7 +18,7 @@ export default function Footer() {
                     </div>
                     <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold uppercase text-white">Sumber</h2>
+                            <h2 className="mb-6 text-sm font-semibold uppercase text-white">Resource</h2>
                             <ul className="text-[#FFD8A8] font-medium">
                                 <li className="mb-4">
                                     <a href="" className="hover:text-white">Ahsan RY</a>
@@ -29,7 +29,7 @@ export default function Footer() {
                             </ul>
                         </div>
                         <div>
-                            <h2 className="mb-6 text-sm font-semibold uppercase text-white">Ikuti kami</h2>
+                            <h2 className="mb-6 text-sm font-semibold uppercase text-white">Follow us</h2>
                             <ul className="text-[#FFD8A8] font-medium">
                                 <li className="mb-4">
                                     <a href="#" className="hover:text-white">Github</a>

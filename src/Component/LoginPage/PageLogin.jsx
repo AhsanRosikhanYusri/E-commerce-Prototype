@@ -17,7 +17,7 @@ export default function LoginPage() {
           onClick={() => ToLandingPage("/")}
         >
           <h2 className="text-white font-montserrat font-bold text-center">
-            Kembali
+            Back
           </h2>
         </div>
         <div className=" flex md:absolute md:left-1/2 md:-translate-x-1/2">

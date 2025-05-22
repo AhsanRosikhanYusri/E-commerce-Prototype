@@ -23,7 +23,7 @@ export default function MenProducts() {
   return (
     <section id="men" className="w-full min-h-[50dvh] h-auto lg:px-16 lg:py-10 sm:p-10 p-6 flex flex-col">
       <h1 className="md:text-3xl text-2xl text-center text-brown-300 font-bold font-montserrat">
-        Produk Pria
+       Men Product
       </h1>
 
       <div className="flex flex-wrap md:gap-10 gap-6 w-full justify-center items-center mt-20">
@@ -31,11 +31,8 @@ export default function MenProducts() {
           <p>Loading products...</p> 
         ) : (
           menProducts.map((product) => (
-            <Link
-              to={`/Product/${product.id}`}
-              key={product.id}
-              className="hover:scale-[1.02] transition-transform duration-200"
-            > 
+       
+            
             <CardProduct
               key={product.id}
               Product={product.image}
@@ -44,8 +41,9 @@ export default function MenProducts() {
               Price={`$${product.price}`}
               Rating={product.rating.rate}
               ShowRating={true}
+              productId={product.id}
             />
-            </Link>
+           
           ))
         )}
       </div>

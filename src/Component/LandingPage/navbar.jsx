@@ -52,12 +52,11 @@ export default function Navbar() {
                     <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                   </li>
                   <li className="relative group cursor-pointer">
-                    Katalog
+                    catalog
                     <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                   </li>
                   <li className="relative group cursor-pointer">
-                    Kontak
-                    <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
+                    contact                    <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                   </li>
                 </ul>
               </nav>
@@ -79,11 +78,11 @@ export default function Navbar() {
                   <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                 </li>
                 <li className="relative group cursor-pointer">
-                  <a href="#Katalog"> Katalog</a>
+                  <a href="#Katalog"> catalog</a>
                   <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                 </li>
                 <li className="relative group cursor-pointer">
-                  <a href="#Kontak">Kontak</a>
+                  <a href="#Kontak">contact</a>
                   <div className="bg-[#ad8572] h-[4px] w-0 group-hover:w-full transition-all duration-500 absolute left-0 -bottom-1"></div>
                 </li>
               </ul>
@@ -122,12 +121,12 @@ export default function Navbar() {
               alt="Cart"
             />
             <div
-              className="bg-brown-300 w-20 rounded-xl flex justify-center items-center px-4 py-1 hover:bg-amber-700
+              className="bg-brown-300 w-24 rounded-xl flex justify-center items-center px-4 py-1 hover:bg-amber-700
             transition-colors duration-300 ease-in-out"
               onClick={() => navigate("/Login")}
             >
               <h1 className="text-white font-semibold font-montserrat">
-                Masuk
+                Sign in
               </h1>
             </div>
           </div>

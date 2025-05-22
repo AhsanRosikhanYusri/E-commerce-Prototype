@@ -1,5 +1,5 @@
 const FormCS = ({
-    Question = "Apakah ada garansi pada setiap Produk jika ada kerusakan?"
+    Question = "Is there a warranty for each product in case of damage?"
 }) => {
     return (
         <button className="group border-b-4 border-brown-300 w-[95%] py-2 md:text-lg text-md text-left flex items-center justify-between transition-all duration-300 ease-in-out ">

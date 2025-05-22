@@ -231,6 +231,7 @@ const Detail = () => {
     toast.success("Successfully Added");
   };
 
+  
   // update size bisa di isi bisa kosong
   const sizes = sizeOptionsByCategory[product.category] || [];
 
@@ -401,11 +402,7 @@ const Detail = () => {
           <p>Loading products...</p>
         ) : (
           recomend.map((product) => (
-            <Link
-              to={`/Product/${product.id}`}
-              key={product.id}
-              className="hover:scale-[1.02] transition-transform duration-200"
-            >
+        
               <CardProduct
                 key={product.id}
                 Product={product.image}
@@ -414,8 +411,9 @@ const Detail = () => {
                 Price={`$${product.price}`}
                 Rating={product.rating.rate}
                 ShowRating={true}
+                productId={product.id}
               />
-            </Link>
+            
           ))
         )}
       </div>

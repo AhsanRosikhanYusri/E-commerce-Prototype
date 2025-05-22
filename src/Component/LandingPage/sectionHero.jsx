@@ -10,17 +10,14 @@ export default function HeroSection() {
       <section id="Home" className=" w-full lg:min-h-[120dvh] md:min-h-[130dvh] lg:block md:flex md:flex-col md:justify-center md:items-center py-10 ">
         <div>
           <h1 className="text-brown-300 font-montserrat text-3xl md:text-4xl  font-bold text-center">
-            Tentang Kami
+            About Us
           </h1>
           <div className="w-full flex justify-center items-center">
             <p className="mt-6 text-center text-wrap md:w-[50%] w-[80%] font-montserrat">
-              Kami percaya bahwa pakaian bukan hanya tentang penampilan, tetapi
-              juga tentang ekspresi diri. Di Boutique, kami menghadirkan koleksi
-              busana berkualitas tinggi yang dirancang untuk membuat Anda merasa
-              percaya diri di setiap momen. Dengan sentuhan tren terbaru dan
-              kenyamanan terbaik, kami siap menemani setiap langkah perjalanan
-              gaya Anda. Temukan siapa kami, dan bergabunglah dalam cerita mode
-              yang penuh inspirasi.
+            We believe that clothing is not just about appearance, but also about self-expression.
+At Boutique, we present a collection of high-quality fashion designed to make you feel confident in every moment.
+With a touch of the latest trends and exceptional comfort, we are here to accompany every step of your style journey.
+Discover who we are and be part of an inspiring fashion story.
             </p>
           </div>
         </div>
@@ -31,14 +28,14 @@ export default function HeroSection() {
             <IconWrap 
             icon={Wallet}
             tittle="Wallet"
-            description="Setiap pembayaran Anda dienkripsi dan diawasi ketat untuk menjaga keamanan dan kenyamanan berbelanja."
+            description="Every payment you make is encrypted and closely monitored to ensure a secure and comfortable shopping experience."
             size = "lg:w-12 lg:h-8"
           
             />
             <IconWrap 
               icon={CustomerService}
               tittle="Customer Service"
-              description="Kami menyediakan pelayanan jika terdapat kendala ataupun pertanyaan, kami siap membantu anda 24 jam! "
+              description="We provide support in case of any issues or questions, we have chatbot and we're here to help you 24/7! "
               size="lg:w-8 lg:h-7"
             />
           </div>

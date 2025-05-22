@@ -5,10 +5,10 @@ export default function LogWith () {
     return (
         <>
             <div className="space-y-2">
-                <h2 className="md:text-2xl text-xl font-bold lg:text-start text-center font-inter ">Bergabung <span className="text-red-500">Gratis</span></h2>
-                <h1 className="md:text-3xl  text-2xl lg:text-start text-center font-extrabold font-montserrat">Temukan Jati Dirimu,<br/>
-                    <span className="text-brown-300">Nikmati Pakaian</span> Kesukaan<br />
-                    Anda di <span className="text-brown-100">Toko Ini</span></h1>
+                <h2 className="md:text-2xl text-xl font-bold lg:text-start text-center font-inter ">Join <span className="text-red-500">Free</span></h2>
+                <h1 className="md:text-3xl  text-2xl lg:text-start text-center font-extrabold font-montserrat">Find Your Identity,<br/>
+                    <span className="text-brown-300">Enjoy Your Favorite</span> Clothes<br />
+                    at <span className="text-brown-100">This Store</span></h1>
                 <div className="space-y-3 flex flex-col w-full lg:items-start items-center mt-5 ">
                     <LoginWith/>
                     <LoginWith

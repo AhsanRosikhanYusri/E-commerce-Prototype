@@ -16,7 +16,7 @@ const LoginWith = ({
         onClick={() => navigate('/Home')}
         className={`${background} ${hover} flex gap-2 w-[210px] justify-between items-center px-4 py-2 shadow-2xl rounded-2xl ${textColor}
             transition-all duration-300 ease-out`}>
-           <p className={` font-montserrat font-bold text-lg `}>Masuk Dengan</p>
+           <p className={` font-montserrat font-bold text-lg `}>Log with</p>
            <img className="w-5" src={icon} alt={icon} />
         </div>
         </>

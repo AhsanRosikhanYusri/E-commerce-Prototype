@@ -13,10 +13,10 @@ export default function Testimoni() {
     <section className="min-h-[100dvh] md:min-h-[70dvh] lg:px-16 md:px-10 px-6 flex justify-center gap-10 flex-col py-10">
       <div className="text-center flex flex-col gap-2">
         <h2 className="font-montserrat text-4xl font-semibold text-brown-300">
-          Testimoni
+          Testimonials
         </h2>
         <h1 className="md:text-5xl text-3xl">
-          Apa kata mereka tentang kami?
+          What do they say about us
         </h1>
       </div>
 

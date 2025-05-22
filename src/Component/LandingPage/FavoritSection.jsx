@@ -11,7 +11,7 @@ export default function FavoritSection() {
       <section id="Katalog" className="  flex justify-center items-center lg:px-16 md:px-10 px-6 w-full py-10 pb-30 lg:h-[100dvh] md:min-h-[40dvh] min-h-[100dvh] ">
         <div className="flex flex-col justify-center items-center gap-10  md:h-full h-screen " >
           <h1 className="lg:text-5xl text-3xl md:text-4xl text-brown-300 font-bold text-center font-montserrat lg:mt-10  mt-[1rem]">
-            Produk Unggulan Kami
+            Our Favorit Product
           </h1>
 
           <div className="grid grid-cols-2 grid-rows-11 gap-4 w-full h-full md:grid-cols-11 md:grid-rows-6 lg:gap-6">

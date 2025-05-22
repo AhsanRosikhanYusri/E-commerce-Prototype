@@ -1,6 +1,6 @@
     import { useEffect, useState } from "react";
-    import { Link } from "react-router-dom";
     import CardProduct from "../UI-Component/cardProduct";
+    
 
     export default function NewRelease() {
     const [products, setProducts] = useState([]);
@@ -22,16 +22,12 @@
     return (
         <section className="min-h-[100dvh] h-auto w-full lg:px-16 lg:py-10 sm:p-10 p-6 flex flex-col items-center justify-center">
         <h1 className="md:text-3xl text-2xl text-brown-300 font-roboto font-bold text-center">
-            PERILISAN BARU
+            NEW RELEASE
         </h1>
 
         <div className="flex flex-wrap md:gap-10 gap-6 w-full justify-center items-center mt-10">
-            {products.map((product) => (
-                <Link
-                to={`/Product/${product.id}`}
-                key={product.id}
-                className="hover:scale-[1.02] transition-transform duration-200"
-              > 
+            {products.map((product,index) => (
+                <div key={index}> 
             <CardProduct
                 key={product.id}
                 Product={product.image}
@@ -39,9 +35,11 @@
                 Title={product.title}
                 Price={`$${product.price}`}
                 Rating={product.rating.rate}
-                ShowRating={true} // Tidak ditampilkan di section ini
-            />
-            </Link>
+                ShowRating={true}
+                productId={product.id}
+                />
+                
+            </div>
             ))}
         </div>
         </section>

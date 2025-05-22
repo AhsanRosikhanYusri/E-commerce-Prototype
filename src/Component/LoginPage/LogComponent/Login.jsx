@@ -10,23 +10,23 @@ export default function Login({ setIsRegis }) {
 
   function handleLogin() {
     if (!email || !password) {
-      setError("Semua kolom wajib diisi!");
+      setError("All fields are required!");
       return;
     }
 
     navigate("/Home");
-    // Lanjutkan proses login di sini
-    setError(""); // reset error jika valid
-    console.log("Login berhasil:", { email, password });
+    // Continue the login process here
+    setError(""); // reset error if valid
+    console.log("Login successful:", { email, password });
   }
 
   return (
     <>
       <div className="w-full md:max-w-[80%] flex flex-col space-y-6 justify-center">
         <h1 className="font-montserrat font-extrabold text-3xl">
-          Selamat
+          Welcome
           <br />
-          <span className="text-brown-300">Datang</span> Kembali
+          <span className="text-brown-300">Back</span>
         </h1>
 
         {/* input email */}
@@ -55,13 +55,13 @@ export default function Login({ setIsRegis }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="peer px-4 pt-6 pb-2 w-full text-sm border-none bg-brown-100 rounded-2xl placeholder-transparent focus:outline-none font-poppins"
-            placeholder="Kata Sandi"
+            placeholder="Password"
           />
           <label
             htmlFor="password"
             className="absolute left-4 top-2 text-xs text-white font-montserrat transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs"
           >
-            Kata Sandi
+            Password
           </label>
         </div>
 
@@ -70,12 +70,12 @@ export default function Login({ setIsRegis }) {
         )}
 
         <p className="text-right font-montserrat -mt-2">
-          Belum punya akun?{" "}
+          Don't have an account?{" "}
           <span
             onClick={() => setIsRegis(true)}
             className="text-brown-300 font-semibold cursor-pointer"
           >
-            Daftar
+            Register
           </span>
         </p>
 
@@ -83,7 +83,7 @@ export default function Login({ setIsRegis }) {
           onClick={handleLogin}
           className="bg-brown-300 hover:bg-amber-700 cursor-pointer transition-colors duration-300 ease-in-out -mt-1 h-12 rounded-full text-xl font-montserrat font-bold text-white"
         >
-          Masuk
+          Login
         </button>
       </div>
     </>

@@ -1,7 +1,7 @@
 import Star from "../../../public/asset/Icon/Star.png";
-import Like from "../../../public/asset/Icon/Hearth.png"
-
+import BuyButton from "./buyButton";
 const CardProduct = ({
+  productId,
   Product,
   Category,
   Title,
@@ -9,12 +9,13 @@ const CardProduct = ({
   Rating,
   ShowRating = true,
   ShowLike = false,
-  onClick = () => {}
+  onClick = () => {},
+
 }) => {
 
 
   return (
-    <div className="md:w-[230px] w-[150px] h-[300px]  rounded-lg    hover:opacity-60 transition-all duration-300 ease-in-out cursor-pointer flex flex-col justify-between p-4">
+    <div className="md:w-[230px] w-[150px] h-[330px]  rounded-lg  flex flex-col justify-between p-4 ">
       
       {/* Gambar */}
       <div className="w-full h-[150px]  flex items-center justify-center">
@@ -73,6 +74,9 @@ const CardProduct = ({
           </div>
           
       </div>
+      <div className="mt-2"> 
+            <BuyButton productId={productId}/>
+            </div>
     </div>
   );
 };

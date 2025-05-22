@@ -1,7 +1,6 @@
 import CS from "../Component/LandingPage/CSsection"
 import Back from "../../public/asset/Icon/Back.png"
 import { useNavigate } from "react-router-dom"
-import {Bot} from "lucide-react";
 import PopOverBot from "../Component/UI-Component/PopOverBot";
 
 
@@ -23,7 +22,7 @@ const CustomerService = () => {
                 </h1>
               </div>
             <div className="-mt-10">
-        <CS/>
+            <CS/>
             </div>
             <div className="fixed right-4 bottom-0  ">
             <PopOverBot/>

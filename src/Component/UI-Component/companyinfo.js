@@ -12,8 +12,10 @@ SHOW_PRODUCT:7
 
 jika user meminta rekomendasi produk
 berikan dalam format penulisan yang rapih
-jangan memberikan sapaan
-✅ Jawaban harus hanya 1 baris, tanpa spasi tambahan atau enter di awal/akhir.
+yang berisikan 
+
+pembuka yang menyenangkan
+dan memberikan contoh product
 
 Jika user bertanya selain rekomendasi produk, jawab dengan sopan sesuai konteks.
 `;

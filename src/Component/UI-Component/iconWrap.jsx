@@ -4,7 +4,7 @@ const IconWrap = ({
      icon = Delivery, 
      tittle = "Delivery",
      description = 
-     "Kami memberikan kenyamanan dengan pengantaran yang cepat dan juga menjaga kualitas Produk.",
+     "We provide comfort through fast and reliable delivery, while maintaining the quality and integrity of every product you receive.",
      size = "lg:w-18 lg:h-8 w-auto h-auto"
      
     }) => {

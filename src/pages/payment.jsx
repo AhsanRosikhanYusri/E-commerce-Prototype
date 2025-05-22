@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Paypal from "../../public/asset/Image/PayPal.png";
 import Visa from "../../public/asset/Image/Visa.png";
 import Swal from "sweetalert2";
+import SelectBox from "../Component/UI-Component/select";
 
 const Payment = () => {
   const navigate = useNavigate();
@@ -132,7 +133,7 @@ const Payment = () => {
         hasError = true;
       }
     }
- 
+
     if (!selectedMethod) {
       setWarning("Please select a payment method");
       return;
@@ -155,28 +156,77 @@ const Payment = () => {
       totalWithTax: sourceData.totalWithTax,
       paymentMethod: selectedMethod,
       paymentDate: new Date().toISOString(),
+      totalFinal: totalFinal
     };
 
-  Swal.fire({
-  title: "Payment Succses",
-  icon: "success",
-  draggable: true
-});
+    Swal.fire({
+      title: "Payment Succses",
+      icon: "success",
+      draggable: true,
+    });
 
-  const existingHistory = JSON.parse(localStorage.getItem("paymentData")) || [];
+    const existingHistory =
+      JSON.parse(localStorage.getItem("paymentData")) || [];
 
-const updatedHistory = [...existingHistory, paymentData];
+    const updatedHistory = [...existingHistory, paymentData];
 
-
-localStorage.setItem("paymentData", JSON.stringify(updatedHistory));
+    localStorage.setItem("paymentData", JSON.stringify(updatedHistory));
     localStorage.removeItem("cart"); // kosongkan cart
     setFormErrors({}); // reset error
-       await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
 
     // Arahkan ke halaman home
-    navigate('/Home');
+    navigate("/Home");
   };
- 
+
+  // couponSelect
+
+  const [selectedCoupon, setSelectedCoupon] = useState('');
+  const [couponOptions, setCouponOptions] = useState([]);
+
+   useEffect(() => {
+  try {
+    const raw = localStorage.getItem("selectedCoupons");
+    const parsed = JSON.parse(raw);
+
+       const couponData =  Array.isArray(parsed) ? parsed : [];
+
+    const formatted = couponData.map((coupon) => ({
+      value: coupon.code,
+      label: `${coupon.code}`,
+      ...coupon,
+    }));
+
+    setCouponOptions(formatted);
+  } catch (error) {
+    console.error("Error parsing coupon data from localStorage:", error);
+    setCouponOptions([]);
+  }
+}, []);
+
+
+  const getDiscount = (totalPrice, coupon) => {
+  if (!coupon) return 0;
+
+  if (coupon.type === "percentage") {
+    return (totalPrice * coupon.disc) / 100;
+  } else if (coupon.type === "flat") {
+    return coupon.disc;
+  }
+  return 0;
+};
+
+const totalWithTax = sourceData.totalWithTax;
+const selectedCouponData = couponOptions.find(coupon => coupon.value === selectedCoupon);
+const discount = getDiscount(totalWithTax, selectedCouponData);
+
+const totalFinal = sourceData.totalWithTax - discount
+
+console.log("Selected coupon:", selectedCoupon);
+console.log("Selected coupon data:", selectedCouponData);
+
+
+
   return (
     <section className="w-full min-h-screen bg-gray-50">
       {/* Header */}
@@ -524,6 +574,10 @@ localStorage.setItem("paymentData", JSON.stringify(updatedHistory));
                         </span>
                       </div>
                       <div className="flex justify-between">
+                        <span className="text-gray-600">Coupon</span>
+                        <span className="font-semibold text-red-500">-${discount.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
                         <span className="text-gray-600">Shipping</span>
                         <span className="font-semibold text-green-600">
                           FREE
@@ -536,10 +590,24 @@ localStorage.setItem("paymentData", JSON.stringify(updatedHistory));
                     <div className="flex justify-between items-center text-xl">
                       <span className="font-bold">Total</span>
                       <span className="font-bold text-brown-300">
-                        ${sourceData.totalWithTax.toFixed(2)}
+                        ${totalFinal.toFixed(2)}
                       </span>
                     </div>
                   </div>
+                </div>
+                <div className="p-4 flex -mt-4 gap-4 flex-col justify-center items-center w-full ">
+                   {selectedCoupon && (
+                    <p className=" w-full text-sm mb-4 text-green-500 ">
+                      Kupon terpilih: {selectedCoupon}
+                    </p>
+                  )}
+                  <SelectBox
+                    id="coupon-select"
+                    label="Pilih Kupon Diskon"
+                    value={selectedCoupon}
+                    onChange={(e) => setSelectedCoupon(e.target.value)}
+                    options={couponOptions}
+                  />
                 </div>
 
                 {/* Payment Method */}

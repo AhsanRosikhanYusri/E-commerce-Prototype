@@ -31,86 +31,92 @@ const PopOverBot = () => {
       .replace(/\*(.*?)\*/g, "<em>$1</em>");
   };
 
-  async function generateBotResponse(mesage) {
-    console.log(mesage);
+async function generateBotResponse(mesage) {
+  console.log(mesage);
 
-    const updateHistory = (text) => {
-      setMessages((prev) => [
-        ...prev.filter((msg) => msg.text !== "Thinking..."),
-        { model: "model", text },
-      ]);
-    };
+  const updateHistory = (text) => {
+    setMessages((prev) => [
+      ...prev.filter((msg) => msg.text !== "Thinking..."),
+      { model: "model", text },
+    ]);
+  };
 
-    const systemPrompt = {
-      role: "user",
-      parts: [{ text: CompanyInfo }],
-    };
+  const systemPrompt = {
+    role: "user",
+    parts: [{ text: CompanyInfo }],
+  };
 
-    mesage = mesage.map(({ text, model }) => ({
-      role: model === "user" ? "user" : "model",
-      parts: [{ text }],
-    }));
+  mesage = mesage.map(({ text, model }) => ({
+    role: model === "user" ? "user" : "model",
+    parts: [{ text }],
+  }));
 
-    const contents = [systemPrompt, ...mesage];
+  const contents = [systemPrompt, ...mesage];
 
-    const requestOption = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents }),
-    };
+  const requestOption = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ contents }),
+  };
 
-try {
-  const response = await fetch(import.meta.env.VITE_API_URL, requestOption);
-  const data = await response.json();
-  if (!response.ok)
-    throw new Error(data.error.message || "something went wrong");
-  
-  console.log(data);
-  console.log(import.meta.env.VITE_API_URL);
+  try {
+    const response = await fetch(import.meta.env.VITE_API_URL, requestOption);
+    const data = await response.json();
 
-  // Pindahkan ini ke atas sebelum digunakan
-  const apiResponseText = data.candidates[0].content.parts[0].text.trim();
+    if (!response.ok)
+      throw new Error(data.error.message || "something went wrong");
 
-  // Cek jika response berisi penanda produk
-  if (apiResponseText.startsWith("SHOW_PRODUCT:")) {
-    const productId = apiResponseText.split(":")[1];
+    const apiResponseText = data.candidates[0].content.parts[0].text.trim();
 
-    try {
-      const productRes = await fetch(`https://fakestoreapi.com/products/${productId}`);
-      const product = await productRes.json();
+    // Ambil semua ID produk dari text
+    const productPattern = /SHOW_PRODUCT:(\d+)/g;
+    const productIds = [...apiResponseText.matchAll(productPattern)].map((match) => match[1]);
 
-      const productHTML = `
-  <div class="rounded-lg bg-white shadow p-3 border border-gray-200 flex flex-col justify-center items-center">
-    <img 
-      src="${product.image}" 
-      alt="${product.title}" 
-      class="w-[100px] h-auto rounded-md mb-3 object-contain flex justify-center items-center"
-    />
-    <h3 class="text-base font-semibold text-gray-800">${product.title}</h3>
-    <p class="text-sm text-gray-600 mb-2 line-clamp-4 mt-2">${product.description}</p>
-    <p class="text-sm font-semibold text-brown-300 text-left self-start flex">Price: $${product.price}</p>
-  </div>
-`;
+    // Bersihkan teks untuk ditampilkan
+    const cleanedText = apiResponseText.replace(/SHOW_PRODUCT:\d+/g, "").trim();
 
-
-      updateHistory(productHTML);
-      return;
-    } catch (error) {
-      updateHistory("❌ Gagal mengambil produk.");
-      console.log(error);
-      return;
+    if (cleanedText) {
+      const formattedText = formatText(cleanedText);
+      updateHistory(formattedText);
     }
-  }
 
-  // Jika tidak berisi instruksi khusus
-  const formattedText = formatText(apiResponseText);
-  updateHistory(formattedText);
-} catch (err) {
-  console.log(err);
+    // Ambil dan render produk
+    if (productIds.length > 0) {
+      const productElements = await Promise.all(
+        productIds.map(async (id) => {
+          try {
+            const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+            const product = await res.json();
+
+            return `
+              <div class="rounded-lg bg-white shadow p-3 border border-gray-200 flex flex-col justify-center items-center mb-3">
+                <img 
+                  src="${product.image}" 
+                  alt="${product.title}" 
+                  class="w-[100px] h-auto rounded-md mb-3 object-contain"
+                />
+                <h3 class="text-base font-semibold text-gray-800">${product.title}</h3>
+                <p class="text-sm text-gray-600 mb-2 mt-2 line-clamp-4">${product.description}</p>
+                <p class="text-sm font-semibold text-brown-300 self-start">Price: $${product.price}</p>
+              </div>
+            `;
+          } catch (error) {
+            console.error(error);
+            return `<p class="text-sm text-red-500">❌ Gagal mengambil produk dengan ID ${id}</p>`;
+          }
+        })
+      );
+
+      // Gabungkan dan update sekaligus
+      const combinedHTML = productElements.join("");
+      updateHistory(combinedHTML);
+    }
+  } catch (err) {
+    console.error(err);
+    updateHistory("❌ Terjadi kesalahan saat memproses permintaan.");
+  }
 }
 
-
-  }
 
   const handleSendMessage = () => {
     if (input.trim() === "") return;
@@ -189,12 +195,12 @@ try {
           </div>
 
           {/* Chat messages */}
-          <div className="flex-1 overflow-y-auto overflow-x-hidden  p-3 flex flex-col gap-4 bg-gray-50">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden p-3 flex flex-col gap-4 bg-gray-50">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`flex items-end ${
-                  message.model === "user" ? "justify-end" : "justify-start"
+                  message.model === "user" ? "justify-end rounded-br-none" : "rounded-bl-none justify-start"
                 } gap-2`}
               >
                 {/* Profile picture untuk model */}

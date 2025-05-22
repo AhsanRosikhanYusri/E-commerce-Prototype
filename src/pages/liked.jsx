@@ -28,7 +28,7 @@ const Liked = () => {
     localStorage.setItem("liked", JSON.stringify(liked))
 
   return (
-    <section className="w-full min-h-[100dvh] h-auto  ">
+    <section className="w-full min-h-[100dvh] h-auto relative ">
       <div className="lg:px-16 lg:py-10 sm:p-10 p-6">
       <div className="flex items-center md:gap-6 gap-4">
         <img
@@ -55,11 +55,7 @@ const Liked = () => {
            
             <div className="flex flex-wrap lg:justify-start justify-center md:gap-10 gap-6 w-full mt-10">
               {liked.map((product) => (
-                   <Link
-              to={`/Product/${product.id}`}
-              key={product.id}
-              className="hover:scale-[1.02] transition-transform duration-200"
-            > 
+              
                 <CardProduct
                   key={product.id}
                   Product={product.image}
@@ -68,9 +64,10 @@ const Liked = () => {
                   Price={`$${product.price}`}
                   Rating={product.rating.rate}
                   ShowLike={true}
-                  onClick={() => handleUnlikeClick(product.id)}  // Trigger handleUnlikeClick saat like di-click
+                  onClick={() => handleUnlikeClick(product.id)} 
+                  productId={product.id} // Trigger handleUnlikeClick saat like di-click
                 />
-                </Link>
+              
               ))}
             </div>
            
@@ -78,7 +75,7 @@ const Liked = () => {
         </div>
       </div>
       </div>
-      <div className=" w-full bottom-0">
+      <div className="bottom-0  w-full">
           <Footer/>
           </div>
     </section>

@@ -8,14 +8,15 @@ import Shoping7 from "../../../public/asset/Image/Shoping7ZALANDO.png"
 import Shoping8 from "../../../public/asset/Image/Shoping8ASOS.png"
 import Shoping9 from "../../../public/asset/Image/Shoping9YOOX.png"
 import Shoping10 from "../../../public/asset/Image/Shoping10BeryBenka.webp"
-
+import { useNavigate } from "react-router-dom"
 export default function Shopping (){
 
+    const navigate = useNavigate()
     return (
         <>
             <section className="w-full min-h-[100dvh] flex flex-col lg:py-10 py-10 md:py-0 items-center justify-center">
                     <h1 className="md:text-5xl text-3xl text-black text-center font-montserrat font-bold">
-                        Temukan kami dimana saja
+                        Find our every where
                     </h1>
 
                     <div className="bg-brown-300 w-full h-auto py-16 md:mt-20 mt-10 rounded-4xl flex justify-center items-center lg:px-16 md:px-10 px-4">
@@ -69,7 +70,9 @@ export default function Shopping (){
                             {/* Component */}
                         </div>
                     </div>
-                    <button className="bg-brown-300/80 hover:bg-brown-300 transition-colors duration-300 ease-in-out p-4 mt-8 w-80 text-xl font-semibold text-white font-poppins rounded-full">Belanja Sekarang</button>
+                    <button className="bg-brown-300/80 hover:bg-brown-300 transition-colors duration-300 ease-in-out p-4 mt-8 w-80 text-xl font-semibold text-white font-poppins rounded-full"
+                    onClick={()=> navigate("/login")}
+                    >Shop Now</button>
             </section>
         </>
     )

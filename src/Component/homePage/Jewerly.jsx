@@ -28,7 +28,7 @@ export default function Jewerly() {
         <img className="rounded-xl w-full" src={Banner} alt="" />
         <div className="mt-20">
           <h1 className="md:text-3xl text-2xl text-center text-brown-300 font-bold font-montserrat">
-            Perhiasan Mewah
+            Jewelery
           </h1>
 
           <div className="flex flex-wrap md:gap-10 gap-6 w-full justify-center items-center mt-20">
@@ -36,11 +36,7 @@ export default function Jewerly() {
               <p>Loading products...</p>
             ) : (
               Jewerly.map((product) => (
-                <Link
-              to={`/Product/${product.id}`}
-              key={product.id}
-              className="hover:scale-[1.02] transition-transform duration-200"
-            > 
+                
                 <CardProduct
                   key={product.id}
                   Product={product.image}
@@ -49,8 +45,9 @@ export default function Jewerly() {
                   Price={`$${product.price}`}
                   Rating={product.rating.rate}
                   ShowRating={true}
+                  productId={product.id}
                 />
-                </Link>
+              
               ))
             )}
           </div>

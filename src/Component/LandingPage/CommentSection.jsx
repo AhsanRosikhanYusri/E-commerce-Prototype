@@ -4,10 +4,10 @@ export default function CommentSection() {
       <section id="Kontak" className=" w-full lg:min-h-[100dvh] min-h-[100dvh] md:min-h-[70dvh] lg:px-16 md:px-10 px-4 py-10 mb-10  flex flex-col justify-center items-center space-y-10">
         <div>
           <h2 className="md:text-3xl text-2xl font-montserrat text-center text-brown-300">
-            Hubungi Kami
+            Contact us
           </h2>
           <h1 className="md:text-4xl text-3xl font-montserrat text-center font-bold">
-            Tuliskan pesan anda disini
+            Type your message here
           </h1>
         </div>
 
@@ -44,7 +44,7 @@ export default function CommentSection() {
             ></textarea>
           </div>
 
-          <button className="w-full h-[10%] rounded-full bg-brown-300 text-white font-bold text-xl  hover:bg-orange-700 transition-all duration-300 ease-in-out">Kirim</button>
+          <button className="w-full h-[10%] rounded-full bg-brown-300 text-white font-bold text-xl  hover:bg-orange-700 transition-all duration-300 ease-in-out">Send</button>
         </div>
 
       </section>
