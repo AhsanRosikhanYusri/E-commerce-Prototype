@@ -30,7 +30,7 @@ cart =  Array.isArray(parsedCart) ? parsedCart : [] ;
     
 }
 
-const rawLiked = localStorage.getItem("liked")
+const rawLiked = localStorage.getItem("likedProducts")
 let liked = []
 
 try {
@@ -69,11 +69,7 @@ liked =  Array.isArray(parsedLike) ? parsedLike : [] ;
       label: "Customer Service",
       path: "/cs"
     },
-    {
-      icon: <Settings size={20}  color="black"/>,
-      label: "Account Settings",
-      path: "/settings"
-    }
+
   ];
 
   return (

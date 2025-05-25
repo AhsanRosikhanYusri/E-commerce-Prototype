@@ -9,9 +9,8 @@ const Liked = () => {
   const navigate = useNavigate();
   const [liked, setLiked] = useState([]);
 
-  // Ambil data produk yang disukai dari localStorage
   useEffect(() => {
-    const savedLikes = JSON.parse(localStorage.getItem("likedProducts")) || [];  // Pastikan nama key konsisten
+    const savedLikes = JSON.parse(localStorage.getItem("likedProducts")) || [];  
     setLiked(savedLikes);
   }, []);
 
@@ -22,7 +21,7 @@ const Liked = () => {
     const updatedLikes = liked.filter((product) => product.id !== productId);
     setLiked(updatedLikes);
      localStorage.removeItem(`liked-${productId}`);
-    localStorage.setItem("likedProducts", JSON.stringify(updatedLikes));  // Pastikan nama key konsisten
+    localStorage.setItem("likedProducts", JSON.stringify(updatedLikes)); 
   };
 
     localStorage.setItem("liked", JSON.stringify(liked))

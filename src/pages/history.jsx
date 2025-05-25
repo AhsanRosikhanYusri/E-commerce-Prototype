@@ -1,44 +1,58 @@
 import { useNavigate } from "react-router-dom"
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Trash2 } from "lucide-react";
+import { useState, useEffect } from "react";
+
+
 
 const HistoryOrder = () => {
-    const navigate = useNavigate()    
+  const [payItem, setPayItem] = useState([]);
+  const navigate = useNavigate()
 
-const getHistory = () => {
-  const raw = localStorage.getItem("paymentData");
+  useEffect(() => {
+    const raw = localStorage.getItem("paymentData");
 
-  if (!raw) return [];
+    if (!raw) return;
 
-  try {
-    const parsed = JSON.parse(raw);
+    try {
+      const parsed = JSON.parse(raw);
 
-    // Pastikan hasilnya array
-    if (Array.isArray(parsed)) {
-      // Sanitasi setiap transaksi di dalam array
-      return parsed.map((entry) => ({
-        items: Array.isArray(entry.items) ? entry.items : [],
-        totalWithTax:
-          typeof entry.totalWithTax === "number"
-            ? entry.totalWithTax
-            : Number(entry.totalWithTax) || 0,
-        paymentDate: entry.paymentDate || "",
-        paymentMethod: entry.paymentMethod || "",
-       totalFinal:
-    typeof entry.totalFinal === "number"
-      ? entry.totalFinal
-      : Number(entry.totalFinal) || 0,
-      }));
-    } else {
-      return [];
+      if (Array.isArray(parsed)) {
+        const sanitized = parsed.map((entry) => ({
+          items: Array.isArray(entry.items) ? entry.items : [],
+          totalWithTax:
+            typeof entry.totalWithTax === "number"
+              ? entry.totalWithTax
+              : Number(entry.totalWithTax) || 0,
+          paymentDate: entry.paymentDate || "",
+          paymentMethod: entry.paymentMethod || "",
+          totalFinal:
+            typeof entry.totalFinal === "number"
+              ? entry.totalFinal
+              : Number(entry.totalFinal) || 0,
+        }));
+
+        sanitized.sort(
+          (a, b) => new Date(b.paymentDate) - new Date(a.paymentDate)
+        );
+
+        setPayItem(sanitized);
+      }
+    } catch (err) {
+      console.error("Error parsing paymentData:", err);
     }
-  } catch (err) {
-    console.error("Error parsing paymentData:", err);
-    return [];
-  }
+  }, []);
+
+
+const deleteHistory = (date) => {
+  const raw = localStorage.getItem("paymentData");
+  if (!raw) return;
+
+  const parsed = JSON.parse(raw);
+  const updated = parsed.filter((entry) => entry.paymentDate !== date);
+
+  localStorage.setItem("paymentData", JSON.stringify(updated));
+  setPayItem(updated); 
 };
-
-const history = getHistory()
-
 
 
 
@@ -61,18 +75,24 @@ const history = getHistory()
           </div>
         </header>
         <div className="lg:px-16 lg:py-6 sm:p-10 p-6">
-            <h1 className="text-[1.3rem] mt-6 font-bold font-inter">Your Order History</h1>
+            <h1 className="text-[1.3rem] mt-6 font-bold font-inter">My Order History</h1>
         
         <div className="mt-8 flex flex-col gap-8 ">
-           {history.length > 0 ? (
-                history.map((order,index)=> (
+           {payItem.length > 0 ? (
+                payItem.map((order,index)=> (
                     <>
                     <div className="rounded-[40px] shadow-lg  ">
                     <div key={index} className="w-full md:flex md:flex-row flex-col h-auto py-6 items-center md:justify-between justify-start bg-brown-300 p-8 text-white rounded-t-lg" >
                         <div className="flex flex-col gap-4">
                         <h1 className="font-montserrat text-white md:text-[.9rem] flex md:self-center self-start"> Date: {new Date(order.paymentDate).toLocaleString()}</h1>
                         </div>
+                        <div className="flex gap-4">
                         <h1 className="font-bold font-inter flex self-start">Total : <span className="font-normal ml-3"> ${order.totalFinal.toFixed(2)}</span> </h1>
+                          <Trash2 
+                          key={order.paymentDate}
+                          onClick={() => deleteHistory(order.paymentDate  )}
+                          color="white" className="hover:opacity-70 transition-all duration-300 ease-out"/>
+                        </div>
                     </div>
                      <h1 className="font-medium px-8 my-4">Payment Method : <span className="text-red-500">{order.paymentMethod}</span></h1>
                     <div className="flex flex-col gap-8 p-8 ">
