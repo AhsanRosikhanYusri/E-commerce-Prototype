@@ -12,7 +12,7 @@
   import CustomerService from './pages/CustomerService';
   import CouponPage from './pages/coupon';
   import HistoryOrder from './pages/history';
-
+  import TrackOrder from './pages/trackOrder';
 
   import { useEffect, useState } from "react";
 
@@ -49,6 +49,7 @@ function App() {
         <Route path='/cs' element ={<CustomerService/>}/>
         <Route path='/coupon' element ={<CouponPage/>}/>
         <Route path='/history' element ={<HistoryOrder/>}/>
+        <Route path= '/tracking' element={<TrackOrder/>} />
         
       </Routes>
     </Router>

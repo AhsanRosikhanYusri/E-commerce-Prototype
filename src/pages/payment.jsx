@@ -176,7 +176,7 @@ const Payment = () => {
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
     // Arahkan ke halaman home
-    navigate("/Home");
+    navigate("/tracking");
   };
 
   // couponSelect
